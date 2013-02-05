@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>Position imageA</title>
+
+<!-- Include the Status from our backend -->
+<script src="/status.js"></script>
+
+<style type="text/css">
+.prevbutton {
+position: absolute;
+left: 50px;
+top: 20px;
+}
+
+.playbutton {
+position: absolute;
+left: 50px;
+top: 95px;
+}
+
+.stopbutton {
+position: absolute;
+left: 48px;
+top: 165px;
+}
+
+.nextbutton {
+position: absolute;
+left: 50px;
+top: 235px;
+}
+
+.volup {
+position: absolute;
+left: 490px;
+top: 50px;
+}
+
+.voldown {
+position: absolute;
+left: 490px;
+top: 140px;
+}
+
+.playlist_current {
+position: absolute;
+left: 150px;
+top: 55px;
+width:240px;
+height:15px;
+font-size: 12px;
+color: #FFFFFF;
+background-color:#0066CC;
+}
+
+.playlist_other {
+position: absolute;
+left: 150px;
+top: 55px;
+width:240px;
+height:15px;
+font-size: 12px;
+color: #FFFFFF;
+}
+
+.playlist_current_color {
+width:225px;
+height:15px;
+color: #FFFFFF;
+background-color:#0066CC;
+}
+
+.playlist_other_color {
+width:225px;
+height:15px;
+color: #FFFFFF;
+}
+
+.volume_text {
+position: absolute;
+left: 515px;
+top: 123px;
+width:50px;
+height:15px;
+font-size: 16px;
+color: #1a70e6;
+}
+
+.playlist {
+position: absolute;
+left: 125px;
+top: 75px;
+width:240px;
+height:15px;
+font-size: 12px;
+color: #FFFFFF;
+list-style-type: circle;
+}
+
+</style>
+</head>
+<body>
+<div style="background-image:url(/pics/background.png);padding:5px;width:687px;height:300px;background-repeat:no-repeat;">
+
+<a href="Prev" target=""> 
+<img src="/pics/prev.png" class="prevbutton" />
+</a>
+<a href="Start" target=""> 
+<img src="/pics/play.png" class="playbutton" />
+</a>
+<a href="Stop" target=""> 
+<img src="/pics/stop.png" class="stopbutton" />
+</a>
+<a href="Next" target=""> 
+<img src="/pics/next.png" class="nextbutton" />
+</a>
+<a href="Volume=+1" target=""> 
+<img src="/pics/volup.png" class="volup" />
+</a>
+<a href="Volume=-1" target=""> 
+<img src="/pics/voldown.png" class="voldown" />
+</a>
+
+<div class="playlist_current">
+    <script>
+     document.write(mpTrackInfo[0].slice(0, 72));
+    </script>
+</div>
+
+<div class="volume_text">
+    <script>
+        document.write(mpStatus[2]);
+    </script>
+</div>
+
+<div>
+    <ul class="playlist">
+    <script>
+        for (var i = 0; i <= mpPlList.length-1; i++)
+        {
+            if (mpPlList[i] == mpStatus[0])
+            {
+                document.write('<li class="playlist_current_color" >');
+                document.write(mpPlList[i]);
+            }
+            else
+            {
+                document.write('<li class="playlist_other_color" >');
+                document.write(mpPlList[i]);
+            }
+            document.write("</li>");
+        }
+    </script>
+    </ul>
+</div>
+
+</div>
+</body>
+</html>
+
