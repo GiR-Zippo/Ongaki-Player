@@ -1,6 +1,6 @@
 # encoding: iso-8859-1
 
-import string, cgi, time, MPlayer
+import string, cgi, time, MPlayer, os
 from os import curdir, sep
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 
@@ -74,7 +74,8 @@ class PlayControl:
     
     def SetVolume(self, val):
         self.volume = self.volume + val
-        self.MPlayer.volume(val)
+        os.system ("amixer set PCM "+ str(self.volume) +"%")
+        #self.MPlayer.volume(val)
         return
         
     #Helper
@@ -116,7 +117,6 @@ class MyHandler(BaseHTTPRequestHandler):
             if self.idx[:6] == "Volume":
                 mplayctrl.SetVolume(float(self.idx[7:]))
                 self.path="/index.html"
-                                
 
             if self.path.endswith(".html"):
                 f = open(curdir + sep + self.path)
@@ -142,7 +142,7 @@ class MyHandler(BaseHTTPRequestHandler):
             self.send_error(404,'File Not Found: %s' % self.path)
 
 def main():
-
+    os.system ("amixer set PCM 100%")
     try:
         server = HTTPServer(('', 3010), MyHandler)
         print 'WebPanel started...'
